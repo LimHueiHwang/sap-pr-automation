@@ -1,36 +1,62 @@
-# PR Automation Macros for SAP Workflow
+# SAP Purchase Requisition Automation
 
-This repository contains 3 Excel VBA macros developed to streamline Purchase Requisition (PR) processing in SAP. These tools are designed to reduce manual workload, minimize human errors, and improve process efficiency.
+## Overview
 
-## Features
+This project automates the validation, creation, and removal of Purchase Requisitions (PR) in SAP.
 
-### 1. `Create_PR()`
-Automatically creates new Purchase Requisitions (PRs) in a standardized format based on input data. This macro prepares the data for upload or direct use in SAP, reducing repetitive manual entry.
+It was developed to reduce repetitive manual work performed by buyers while improving consistency during PR processing.
 
-### 2. `validate_PR()`
-Validates each PR line against predefined rules to ensure data completeness and correctness before submission to SAP. Useful for early error detection and cleaner uploads.
-
-### 3. `Close_Fixed_PR()`
-Automatically closes or flags PRs that have been use, preventing backlog and maintaining data accuracy in SAP.
+The solution combines Excel VBA with SAP GUI Scripting to automate business workflows based on predefined validation rules.
 
 ---
 
-## Files
+## Business Problem
 
-| File Name             | Description                            |
-|----------------------|----------------------------------------|
-| `Create_PR.bas`      | Macro script for creating PRs          |
-| `validate_PR.bas`    | Macro script for PR validation         |
-| `Close_Fixed_PR.bas` | Macro script for closing fixed PRs     |
+Before this automation was introduced, buyers manually:
+
+- Validated Plan Orders
+- Verified business rules
+- Created Purchase Requisitions
+- Removed unnecessary Purchase Requisitions
+
+The process involved repetitive SAP navigation and manual validation, making it time-consuming and increasing the risk of inconsistent processing.
+
+---
+
+## Solution
+
+This automation streamlines the Purchase Requisition process by:
+
+- Validating Plan Orders before PR creation
+- Applying business validation rules
+- Automating PR creation
+- Automating PR removal
 
 ---
 
-## Why It Matters
+## Technologies Used
 
-These tools were built based on real-world experience handling SAP PR flows and Excel-based PR creation. By automating repetitive steps, they:
-
-- Save time — reduced PR processing time by up to **80%**
-- Reduce manual input errors
-- Ensure consistency and SAP compliance
+- Excel VBA
+- SAP GUI Scripting
+- Microsoft Excel
+- SAP MM
 
 ---
+
+## Business Impact
+
+- Reduced repetitive manual SAP processing
+- Standardized Purchase Requisition validation
+- Improved consistency during PR creation
+
+---
+
+## Future Improvements
+
+If rebuilding this project today, I would:
+
+- Rebuild the solution using Python.
+- Replace Excel-based validation with pandas.
+- Separate SAP operations into reusable modules.
+- Introduce centralized logging.
+- Support parallel SAP sessions.
