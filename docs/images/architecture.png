@@ -1,1 +1,17 @@
-
+                 User
+                   │
+                   ▼
+          Excel VBA Interface
+                   │
+                   ▼
+            Main Controller
+        ┌──────────┼──────────┐
+        ▼          ▼          ▼
+ Validation   SAP Module   Excel Module
+        │          │          │
+        └──────────┼──────────┘
+                   ▼
+           SAP GUI Scripting
+                   │
+                   ▼
+                 SAP MM
