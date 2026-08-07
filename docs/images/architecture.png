@@ -1,17 +1,17 @@
-                 User
-                   │
-                   ▼
-          Excel VBA Interface
-                   │
-                   ▼
-            Main Controller
-        ┌──────────┼──────────┐
-        ▼          ▼          ▼
- Validation   SAP Module   Excel Module
-        │          │          │
-        └──────────┼──────────┘
-                   ▼
-           SAP GUI Scripting
-                   │
-                   ▼
-                 SAP MM
+                         Excel Workbook
+                              │
+                       VBA Controller
+                              │
+             ┌────────────────┼────────────────┐
+             │                │                │
+             ▼                ▼                ▼
+       Plan Order         Create PR          Close PR
+       Validation         Module             Module
+             │                │                │
+             └────────────────┼────────────────┘
+                              │
+                              ▼
+                     SAP GUI Scripting
+                              │
+                              ▼
+                            SAP
