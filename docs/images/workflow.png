@@ -1,19 +1,26 @@
-User
- │
- ▼
-Open Excel
- │
- ▼
-Load Input
- │
- ▼
-Validate Plan Orders
- │
- ▼
-Apply Business Rules
- │
- ▼
-Create / Remove PR
- │
- ▼
-Generate Result
+                Start
+                  │
+                  ▼
+           Excel Input
+                  │
+                  ▼
+        Validate Plan Order
+                  │
+                  ▼
+        Apply Business Rules
+                  │
+           ┌──────┴──────┐
+           │             │
+        Valid?         Invalid
+           │             │
+           ▼             ▼
+     Continue        Stop / Notify
+           │
+           ▼
+     Create / Remove PR
+           │
+           ▼
+       Processing Result
+           │
+           ▼
+          End
