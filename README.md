@@ -12,9 +12,9 @@
 
 This project automates Purchase Requisition (PR) creation for the Purchasing team using Microsoft Excel VBA and SAP GUI Scripting.
 
-Before creating a PR, the automation checks the available Plan Order quantity and determines whether the part is a Sales Agreement (SA) part.
+Before creating a PR, the automation checks the available Plan Order quantity and validates whether the part is a Sales Agreement (SA) part.
 
-For SA parts, an additional manual check is required to confirm that sufficient Plan Order quantity is available before the PR is created.
+For SA parts, a manual check is required to confirm that sufficient Plan Order quantity is available before proceeding with PR creation.
 
 The tool also includes a separate workflow for closing or fixing existing Purchase Requisitions.
 
@@ -150,11 +150,10 @@ The PR creation workflow follows the existing Purchasing process.
 The main checks are:
 
 - Check the available Plan Order quantity.
-- Determine whether the part is a Sales Agreement (SA) part.
+- Validate whether the part is a Sales Agreement (SA) part.
 - For non-SA parts, proceed with PR creation.
-- For SA parts, perform an additional manual check to confirm sufficient Plan Order quantity.
+- For SA parts, perform a manual check to confirm sufficient Plan Order quantity.
 - Stop the PR creation process when the required condition is not satisfied.
-
 ---
 
 ## Business Impact
