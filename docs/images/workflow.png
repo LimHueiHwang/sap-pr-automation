@@ -1,26 +1,13 @@
-                Start
-                  │
-                  ▼
-           Excel Input
-                  │
-                  ▼
-        Validate Plan Order
-                  │
-                  ▼
-        Apply Business Rules
-                  │
-           ┌──────┴──────┐
-           │             │
-        Valid?         Invalid
-           │             │
-           ▼             ▼
-     Continue        Stop / Notify
-           │
-           ▼
-     Create / Remove PR
-           │
-           ▼
-       Processing Result
-           │
-           ▼
-          End
+Excel Input
+    ↓
+Check Plan Order
+    ↓
+Check required quantity
+    ↓
+Check SA condition
+    ↓
+Validation passed?
+    ↓
+Create Purchase Requisition
+    ↓
+Return SAP result / PR number
