@@ -1,13 +1,22 @@
-Excel Input
-    ↓
-Check Plan Order
-    ↓
-Check required quantity
-    ↓
-Check SA condition
-    ↓
-Validation passed?
-    ↓
-Create Purchase Requisition
-    ↓
-Return SAP result / PR number
+                  CREATE PR
+                      │
+                      ▼
+                 Excel Input
+                      │
+                      ▼
+              Check Plan Order
+                 Availability
+                      │
+                      ▼
+              Check SA Condition
+                      │
+                      ▼
+             Validation Passed?
+                 │          │
+                Yes         No
+                 │          │
+                 ▼          ▼
+             Create PR     Stop
+                 │
+                 ▼
+          Return SAP Result
