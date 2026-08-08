@@ -20,3 +20,16 @@
                  │
                  ▼
           Return SAP Result
+
+---
+
+                   CLOSE PR
+                      │
+                      ▼
+               Existing PR
+                      │
+                      ▼
+                  Close PR
+                      │
+                      ▼
+             Return SAP Result
