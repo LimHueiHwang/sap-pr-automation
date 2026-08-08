@@ -103,7 +103,7 @@ The user provides the existing PR information, the automation performs the SAP p
 
 The following diagram illustrates the PR creation workflow, including Plan Order and Sales Agreement checks, together with the separate PR closure workflow.
 
-![SAP PR Automation Workflow](docs/images/workflow.png)
+![SAP PR Automation Workflow](docs/images/Workflow.png)
 
 ---
 
@@ -111,7 +111,7 @@ The following diagram illustrates the PR creation workflow, including Plan Order
 
 The current solution uses separate VBA modules for validation, PR creation, and PR closure.
 
-![SAP PR Automation Architecture](docs/images/architecture.png)
+![SAP PR Automation Architecture](docs/images/Architecture.png)
 
 ---
 
