@@ -5,7 +5,7 @@
 ![Excel VBA](https://img.shields.io/badge/VBA-Excel-green)
 ![SAP GUI Scripting](https://img.shields.io/badge/SAP%20GUI-Scripting-orange)
 
-> Excel VBA and SAP GUI automation developed to support Purchase Requisition creation, Plan Order validation, and Purchase Requisition Close/Fix activities for the Purchasing team.
+> Excel VBA and SAP GUI automation developed to support Purchase Requisition creation, Plan Order / Sales Agreement validation, and Purchase Requisition Close/Fix activities for the Purchasing team.
 
 ---
 
@@ -20,19 +20,19 @@ The solution combines:
 - SAP GUI Scripting
 - SAP Purchasing business rules
 
-The automation supports three main areas:
+The automation supports three functional areas:
 
-1. **Plan Order Validation**
+1. **Plan Order / Sales Agreement Validation**
 2. **Purchase Requisition Creation**
 3. **Purchase Requisition Close/Fix**
 
 ### Primary Purpose
 
-The primary purpose of the automation is to support **Purchase Requisition creation**.
+The **primary purpose of this automation is Purchase Requisition creation**.
 
-Plan Order and Sales Agreement (SA) checks are performed as part of the validation process supporting PR creation.
+Plan Order and Sales Agreement (SA) validation supports the PR creation process by helping determine whether the required conditions are met before proceeding.
 
-The **Close/Fix PR process is a separate workflow** used for existing Purchase Requisitions.
+The **Close/Fix PR process is a separate workflow** used to update existing Purchase Requisitions.
 
 **Project Status:** Production
 
@@ -40,7 +40,7 @@ The **Close/Fix PR process is a separate workflow** used for existing Purchase R
 
 # Business Problem
 
-Purchase Requisition processing involved repetitive manual activities between Excel and SAP.
+Purchase Requisition processing involved repetitive activities between Excel and SAP.
 
 Purchasing users needed to:
 
@@ -48,10 +48,10 @@ Purchasing users needed to:
 - Check available Plan Order quantity.
 - Determine whether a material is a Sales Agreement (SA) part.
 - Perform additional checking when an SA part is identified.
-- Navigate SAP to process the required information.
+- Navigate through SAP to process the required information.
 - Create Purchase Requisitions.
 - Review SAP processing messages.
-- Update or Close/Fix existing Purchase Requisitions.
+- Process existing Purchase Requisitions that required Close/Fix actions.
 
 Performing these activities manually required repeated SAP navigation and data entry.
 
@@ -61,36 +61,36 @@ The automation was developed to standardize these repetitive activities and prov
 
 # Solution
 
-The solution uses Excel VBA as the controller and SAP GUI Scripting to automate SAP interactions.
+The solution uses Excel VBA as the automation controller and SAP GUI Scripting to automate SAP interactions.
 
-The automation supports:
+The automation supports three functional areas.
 
-### Plan Order Validation
+### Plan Order / SA Validation
 
 The validation process checks:
 
-- Required material information.
 - Plan Order availability.
-- Whether the material is identified as a Sales Agreement (SA) part.
+- Required quantity.
+- Whether the material is identified as an SA part.
 
 When an SA part is identified, an additional manual check is required to confirm whether sufficient Plan Order quantity is available before proceeding.
 
 ### Purchase Requisition Creation
 
-The PR creation workflow is the primary process.
+PR creation is the primary workflow.
 
 The automation:
 
 - Reads the required information from Excel.
 - Performs the required validation.
-- Processes the relevant Plan Order information in SAP.
+- Processes the relevant SAP information.
 - Creates the Purchase Requisition.
 - Retrieves the SAP processing result.
 - Returns the result to Excel.
 
 ### Purchase Requisition Close/Fix
 
-A separate workflow is provided for processing existing Purchase Requisitions that require Close/Fix actions.
+A separate workflow is provided for existing Purchase Requisitions that require Close/Fix actions.
 
 The automation:
 
@@ -99,8 +99,6 @@ The automation:
 - Saves the PR.
 - Retrieves the SAP processing result.
 - Updates the Excel result.
-
----
 
 # Key Features
 
@@ -136,83 +134,19 @@ The overall automation workflow is shown below.
 
 ![SAP PR Automation Workflow](docs/images/workflow.png)
 
-The workflow is divided into three areas:
+The primary workflow starts from Excel input, performs the required Plan Order / Sales Agreement validation, processes the required SAP information, creates the Purchase Requisition, and returns the SAP processing result to Excel.
 
-### 1. Plan Order Validation
-
-The validation process:
-
-1. Reads the required Plan Order information from Excel.
-2. Retrieves Plan Order information from SAP.
-3. Checks available Plan Order quantity.
-4. Determines whether the material is an SA part.
-5. Routes the material according to the validation result.
-
-For an SA part, a manual check is required to confirm whether sufficient Plan Order quantity is available.
-
-If the Plan Order quantity is sufficient, the user can proceed with PR creation.
-
-If the quantity is insufficient, the process stops.
-
-### 2. Create PR — Primary Flow
-
-The Purchase Requisition creation workflow is the primary automation.
-
-The general process is:
-
-```text
-Excel Input
-     │
-     ▼
-Plan Order / SA Validation
-     │
-     ▼
-Process Required SAP Information
-     │
-     ▼
-Create Purchase Requisition
-     │
-     ▼
-Retrieve SAP Result
-     │
-     ▼
-Update Excel
-```
-
-### 3. Close PR — Separate Flow
-
-Close PR is a separate workflow from PR creation.
-
-The general process is:
-
-```text
-Existing Purchase Requisition
-          │
-          ▼
-      Retrieve PR
-          │
-          ▼
-     Close / Fix PR
-          │
-          ▼
-         Save
-          │
-          ▼
-   Retrieve SAP Result
-          │
-          ▼
-      Update Excel
-```
+The Close/Fix PR process is handled as a separate workflow.
 
 ---
 
 # Validation Logic
 
-The Plan Order validation supports the PR creation process.
+Plan Order / SA validation supports the Purchase Requisition creation process.
 
-The validation focuses on two important conditions:
+The validation focuses on two conditions:
 
-### Plan Order Quantity
+### Plan Order Availability
 
 The automation checks available Plan Order information against the required quantity.
 
@@ -220,53 +154,32 @@ The automation checks available Plan Order information against the required quan
 
 The automation determines whether the material is identified as an SA part.
 
-The resulting decision path is:
+When an SA part is identified, an additional manual check is required to confirm whether sufficient Plan Order quantity is available.
+
+The validation can result in conditions such as:
 
 ```text
-Check Plan Order
-      │
-      ▼
-Check SA Part
-      │
-      ▼
-   Is SA Part?
-   ┌───────┴────────┐
-   │                │
-  No               Yes
-   │                │
-   ▼                ▼
-Proceed         Manual Check
-to PR           Required
-Creation             │
-                     ▼
-             Enough Plan Order?
-                ┌────┴────┐
-               Yes        No
-                │          │
-                ▼          ▼
-             Create PR    Stop
+OK
+Check if SA part
+Not enough Plan Order
 ```
 
-This validation logic is also represented in the repository architecture documentation. :contentReference[oaicite:1]{index=1}
+The validation result supports the decision to proceed with PR creation.
 
 ---
 
 # SAP GUI Automation
 
-SAP GUI Scripting is used to automate the interaction between the VBA controller and SAP.
+SAP GUI Scripting is used to automate the interaction between the Excel VBA controller and SAP.
 
-The automation is responsible for:
+The automation performs the required SAP interactions, including:
 
 - Sending data to SAP.
-- Navigating required SAP screens.
+- Navigating SAP screens.
 - Processing purchasing information.
 - Executing the required actions.
 - Reading SAP processing messages.
 - Returning results to Excel.
-
-The SAP GUI Scripting layer acts as the integration point between the Excel VBA automation and the SAP system. :contentReference[oaicite:2]{index=2}
-
----
 
 # Architecture
 
@@ -284,44 +197,27 @@ The solution uses Excel as the user-facing layer, VBA as the automation controll
 | VBA Controller | Controls the automation workflow |
 | Plan Order Validation | Checks Plan Order quantity and SA conditions |
 | Create PR Module | Executes the primary PR creation workflow |
-| Close PR Module | Executes the separate PR Close/Fix workflow |
+| Close/Fix PR Module | Executes the separate PR Close/Fix workflow |
 | SAP GUI Scripting | Automates SAP interactions |
-| SAP System | Executes SAP transactions and returns processing results |
+| SAP System | Executes SAP processes and returns results |
 | Excel Output | Displays processing status, messages and PR results |
-
-The architecture diagram shows the three functional areas connecting through SAP GUI Scripting to the SAP system. :contentReference[oaicite:3]{index=3}
 
 ---
 
 # Purchase Requisition Creation
 
-Purchase Requisition creation is the primary function of this project.
+Purchase Requisition creation is the **primary function** of this project.
 
 The automation uses Excel input and SAP processing to create the required PR.
 
-The general process is:
+The process includes:
 
-```text
-1. Input Data
-       │
-       ▼
-2. Check Plan Order
-       │
-       ▼
-3. Check SA Condition
-       │
-       ▼
-4. Process SAP Information
-       │
-       ▼
-5. Create PR
-       │
-       ▼
-6. Retrieve SAP Message
-       │
-       ▼
-7. Return Result to Excel
-```
+1. Reading the required information from Excel.
+2. Performing the required Plan Order / SA validation.
+3. Processing the required SAP information.
+4. Creating the Purchase Requisition.
+5. Retrieving the SAP processing result.
+6. Updating the Excel result.
 
 The result may include:
 
@@ -333,32 +229,18 @@ The result may include:
 
 # Purchase Requisition Close/Fix
 
-The Close/Fix process is a separate workflow from PR creation.
+Close/Fix is a **separate workflow** from PR creation.
 
-It is used when an existing Purchase Requisition requires the relevant Close/Fix action.
+It is used when an existing Purchase Requisition requires the applicable Close/Fix action.
 
-The workflow is:
+The automation:
 
-```text
-Existing PR
-    │
-    ▼
-Open PR in SAP
-    │
-    ▼
-Perform Close/Fix Action
-    │
-    ▼
-Save PR
-    │
-    ▼
-Retrieve SAP Message
-    │
-    ▼
-Update Excel Result
-```
-
-This keeps the PR creation and PR maintenance workflows separate while allowing them to be managed within the same automation project.
+1. Retrieves the existing PR.
+2. Opens the PR in SAP.
+3. Performs the required Close/Fix action.
+4. Saves the PR.
+5. Retrieves the SAP processing result.
+6. Updates the Excel result.
 
 ---
 
@@ -375,9 +257,7 @@ The workbook is used to:
 - Display SAP messages.
 - Display PR numbers and processing status.
 
-This allows Purchasing users to interact with the automation through an environment familiar to their existing workflow.
-
----
+This allows Purchasing users to interact with the automation through an environment already familiar to them.
 
 # Screenshots and Results
 
@@ -389,7 +269,7 @@ The repository contains screenshots demonstrating the main automation workflows 
 
 ![Plan Order Validation](docs/images/plan-order-validation.png)
 
-This screenshot demonstrates the Plan Order validation process and the information used to support PR creation.
+This screenshot demonstrates the Plan Order / SA validation process and the information used to support PR creation.
 
 ---
 
@@ -448,15 +328,13 @@ The automation helps the Purchasing team by:
 - Reducing repetitive SAP navigation.
 - Reducing repetitive manual data entry.
 - Standardizing the PR creation workflow.
-- Providing a repeatable Plan Order validation process.
+- Providing a repeatable Plan Order / SA validation process.
 - Supporting consistent handling of SA-related conditions.
 - Automating repetitive PR Close/Fix activities.
 - Returning SAP processing results directly to Excel.
 - Allowing users to review processing status within the existing Excel workflow.
 
 No percentage-based efficiency improvement is claimed because formally measured performance data is not available.
-
----
 
 # My Role
 
@@ -507,8 +385,6 @@ Key lessons include:
 - SAP processing results should be captured and returned to users.
 - Separate workflows should remain clearly defined when they serve different business purposes.
 - Automation should focus on reducing repetitive work while preserving the existing business process.
-
----
 
 # Future Improvements
 
@@ -622,7 +498,7 @@ Plan Order and Sales Agreement validation supports the PR creation process by he
 
 A **separate Close/Fix workflow** is also provided for processing existing Purchase Requisitions.
 
-The overall solution combines:
+The solution combines:
 
 ```text
 Excel Workbook
@@ -630,15 +506,12 @@ Excel Workbook
       ▼
 VBA Controller
       │
-      ├───────────────┐
-      │               │
-      ▼               ▼
-PR Validation      Close/Fix PR
-      │               │
-      ▼               │
-Create PR            │
-      │               │
-      └───────┬───────┘
+      ├── Plan Order / SA Validation
+      │
+      ├── Create PR
+      │
+      └── Close/Fix PR
+              │
               ▼
        SAP GUI Scripting
               │
@@ -652,4 +525,4 @@ Create PR            │
         Excel Workbook
 ```
 
-The project demonstrates practical experience in understanding a Purchasing business process, implementing SAP GUI automation, applying business rules, and maintaining a production automation solution.
+This project demonstrates practical experience in understanding a Purchasing business process, implementing SAP GUI automation, applying business rules, and maintaining a production automation solution.
