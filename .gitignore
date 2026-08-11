@@ -1,0 +1,23 @@
+# Excel temporary files
+~$*.xls*
+*.tmp
+
+# VBA temporary files
+*.exd
+
+# Windows files
+Thumbs.db
+Desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+
+# Python files if Python development is added later
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Logs
+*.log
