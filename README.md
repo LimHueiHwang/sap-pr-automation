@@ -379,7 +379,7 @@ The Plan Order / Sales Agreement (SA) validation workflow was originally develop
 
 Following the SAP system upgrade, the underlying SAP SQ00 query:
 
-`PU-088MRP_EFFI`
+`DEMO_SAP_QUERY`
 
 is no longer consistently returning the expected report data.
 
