@@ -54,7 +54,6 @@ The architecture consists of an Excel workbook, separate VBA workflows, SAP GUI 
 * Excel VBA
 * SAP GUI Scripting
 * SAP MM / Purchasing
-* Excel formulas and data processing
 
 ## Key Features
 
