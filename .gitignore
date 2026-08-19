@@ -2,7 +2,7 @@
 ~$*.xls*
 *.tmp
 
-# Original company workbook - never commit
+# Original company workbook
 **/Combine PR.xlsm
 
 # Python / development files
