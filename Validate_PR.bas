@@ -206,7 +206,7 @@ Sub validate_PR()
 
         .findById( _
             "wnd[0]/usr/ctxtRS38R-QNUM" _
-        ).Text = "PU-088MRP_EFFI"
+        ).Text = "DEMO_SAP_QUERY"
 
         .findById( _
             "wnd[0]/tbar[1]/btn[8]" _
