@@ -2,8 +2,8 @@
 ~$*.xls*
 *.tmp
 
-# Original company workbook
-Combine PR.xlsm
+# Original company workbook - never commit
+**/Combine PR.xlsm
 
 # Python / development files
 __pycache__/
